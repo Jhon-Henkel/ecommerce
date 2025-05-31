@@ -10,6 +10,9 @@ class RouteNameEnumUnitTest extends UnitTestCase
     public function testEnum()
     {
         $this->assertEquals('api.auth.login', RouteNameEnum::ApiAuthLogin->value);
+
         $this->assertEquals('api.product.list', RouteNameEnum::ApiProductList->value);
+
+        $this->assertEquals('api.payment.method.list', RouteNameEnum::ApiPaymentMethodList->value);
     }
 }

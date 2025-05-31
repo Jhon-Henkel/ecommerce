@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PaymentMethod\PaymentMethod;
 use App\Models\Product\Product;
 use App\Models\User\User;
 use Illuminate\Database\Seeder;
@@ -26,5 +27,8 @@ class DatabaseSeeder extends Seeder
         Product::create(['name' => 'Varal de chão Mor', 'price' => 99]);
         Product::create(['name' => 'Sofá', 'price' => 5000]);
         Product::create(['name' => 'Guitarra Elétrica Gibson', 'price' => 15000]);
+
+        PaymentMethod::create(['name' => 'Pix', 'discount_percent' => 10, 'fee_percent' => 0, 'max_discount_installments' => 1, 'max_installments' => 1]);
+        PaymentMethod::create(['name' => 'Cartão de Crédito', 'discount_percent' => 10, 'fee_percent' => 1, 'max_discount_installments' => 1, 'max_installments' => 12]);
     }
 }
