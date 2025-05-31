@@ -4,6 +4,7 @@ namespace App\Models\Cart;
 
 use App\Models\PaymentMethod\PaymentMethod;
 use App\Models\User\User;
+use App\Modules\Cart\UseCase\Actions\CartUpdateActionUseCase;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -46,6 +47,14 @@ class Cart extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    protected static function boot(): void
+    {
+        parent::boot();
+        static::updated(function (Cart $item) {
+            new CartUpdateActionUseCase()->execute($item);
+        });
+    }
 
     /**
      * @return HasOne<User, $this>

@@ -1,10 +1,9 @@
 <?php
 
-namespace Feature\Modules\Cart\CartItem;
+namespace Feature\Modules\Cart;
 
 use App\Infra\Response\Enum\StatusCodeEnum;
 use App\Models\Product\Product;
-use PHPUnit\Framework\Attributes\TestDox;
 use Tests\FeatureTestCase;
 
 class CartDeleteControllerFeatureTest extends FeatureTestCase

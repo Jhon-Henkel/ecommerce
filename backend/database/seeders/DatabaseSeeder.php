@@ -24,8 +24,6 @@ class DatabaseSeeder extends Seeder
         Product::create(['name' => "Ar Condicionado Split 12000 Btu's", 'price' => 3700]);
         Product::create(['name' => 'Parafusadeira 21v', 'price' => 250]);
         Product::create(['name' => 'Playstation 5', 'price' => 4300]);
-        Product::create(['name' => 'Varal de chão Mor', 'price' => 99]);
-        Product::create(['name' => 'Sofá', 'price' => 5000]);
         Product::create(['name' => 'Guitarra Elétrica Gibson', 'price' => 15000]);
 
         PaymentMethod::create(['name' => 'Pix', 'discount_percent' => 10, 'fee_percent' => 0, 'max_discount_installments' => 1, 'max_installments' => 1]);
