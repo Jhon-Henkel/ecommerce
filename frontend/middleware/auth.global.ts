@@ -11,9 +11,10 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
     const publicRoutes = [
         authPage.login.route,
+        PagesMap.page.index.route,
     ]
 
-    if (publicRoutes.includes(to.path.slice(1))) {
+    if (publicRoutes.includes(to.path)) {
         return
     }
 

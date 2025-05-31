@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {RouteUtil} from "~/utils/route/route.util";
 
-const userRoute = PagesMap.page.home
+const userRoute = PagesMap.page.index
 const items = ref([
     {
         label: userRoute.label,

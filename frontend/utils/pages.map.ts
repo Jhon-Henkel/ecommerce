@@ -8,10 +8,10 @@ export type PageMap = {
 
 export const PagesMap = {
     page: {
-        home: {
+        index: {
             label: 'Início',
             icon: IconEnum.home,
-            route: '/home',
+            route: '/',
         },
         auth: {
             login: {

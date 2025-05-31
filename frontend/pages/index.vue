@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import AppPage from "~/components/page/app-page.vue";
+import {BreadcrumbDTO} from "~/components/breadcrumb/dto/breadcrumb.dto";
 
 </script>
 
 <template>
-    <h1>index</h1>
+    <app-page :breadcrumb="new BreadcrumbDTO()" page-title="Início"/>
 </template>

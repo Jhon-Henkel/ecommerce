@@ -25,7 +25,7 @@ export default class  LoginService {
                 return
             }
         }
-        RouteUtil.redirect(PagesMap.page.home)
+        RouteUtil.redirect(PagesMap.page.index)
     }
 
     public makeFormData(): LoginFormInterface {

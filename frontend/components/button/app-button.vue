@@ -20,12 +20,12 @@ const { currentTheme } = useTheme()
 <template>
     <div v-if="positionEnd" class="flex justify-end">
         <!-- eslint-disable vue/no-duplicate-attributes -->
-        <UButton v-bind="$attrs" :color="color ?? currentTheme.primaryColorRoot" >
+        <UButton v-bind="$attrs" class="cursor-pointer" :color="color ?? currentTheme.primaryColorRoot" >
             <slot />
         </UButton>
     </div>
     <!-- eslint-disable vue/no-duplicate-attributes -->
-    <UButton v-else v-bind="$attrs" :color="color ?? currentTheme.primaryColorRoot" >
+    <UButton v-else v-bind="$attrs" class="cursor-pointer" :color="color ?? currentTheme.primaryColorRoot" >
         <slot />
     </UButton>
 </template>

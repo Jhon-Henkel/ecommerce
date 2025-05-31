@@ -1,9 +1,7 @@
 <script setup>
-import {useTheme} from "~/composables/theme/use.theme.js";
 import {IconEnum} from "~/utils/enum/icon.enum.js";
 
 const colorMode = useColorMode()
-const {currentTheme} = useTheme()
 
 const isDark = computed({
     get() {
@@ -14,13 +12,13 @@ const isDark = computed({
     }
 })
 const icon = computed(() => {
-    return isDark.value ? IconEnum.moon : IconEnum.sum
+    return isDark.value ? IconEnum.moon : IconEnum.sun
 })
 </script>
 
 <template>
     <ClientOnly v-if="!colorMode?.forced">
-        <UButton :icon="icon" color="neutral" variant="ghost" :class="[currentTheme.bgHover300, 'text-white cursor-pointer']" @click="isDark = !isDark"/>
+        <UButton :icon="icon" color="neutral" variant="ghost" class="text-white cursor-pointer" @click="isDark = !isDark"/>
         <template #fallback>
             <div class="size-8"/>
         </template>

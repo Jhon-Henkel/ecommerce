@@ -17,7 +17,7 @@ export const useAuthStore = defineStore('auth', {
         logout(): void {
             this.token = null
             this.expiresIn = null
-            RouteUtil.redirect(PagesMap.page.auth.login)
+            RouteUtil.redirect(PagesMap.page.index)
         }
     }
 })

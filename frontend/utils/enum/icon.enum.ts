@@ -100,6 +100,6 @@ export const IconEnum = {
     pencil: 'lucide:pencil',
     octagonAlert: 'lucide:octagon-alert',
     download: 'lucide:download',
-    sum: 'lucide:sum',
+    sun: 'lucide:sun',
     moon: 'lucide:moon',
 }
