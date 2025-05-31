@@ -4,6 +4,6 @@ be-bash:
 
 be-logs:
 	@echo "Tailing logs..."
-	tail -f -n 100 storage/logs/laravel.log
+	tail -f -n 100 backend/storage/logs/laravel.log
 
 PHONY: be-bash be-logs
