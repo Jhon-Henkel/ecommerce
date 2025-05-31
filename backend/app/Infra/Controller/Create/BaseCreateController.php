@@ -13,7 +13,6 @@ abstract class BaseCreateController extends Controller
 {
     abstract protected function getUseCase(): ICreateUseCase;
     abstract protected function getRules(): array;
-    abstract protected function getModelName(): string;
 
     public function __invoke(Request $request): JsonResponse
     {
