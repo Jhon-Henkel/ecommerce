@@ -5,6 +5,7 @@ use App\Modules\Auth\Controller\Login\LoginController;
 use App\Modules\Cart\CartItem\Controller\CartItemCreateController;
 use App\Modules\Cart\CartItem\Controller\CartItemDeleteController;
 use App\Modules\Cart\CartItem\Controller\CartItemUpdateController;
+use App\Modules\Cart\Controller\CartDeleteController;
 use App\Modules\Cart\Controller\CartUpdateController;
 use App\Modules\PaymentMethod\Controller\PaymentMethodListController;
 use App\Modules\Product\Controller\ProductListController;
@@ -32,6 +33,7 @@ Route::prefix('v1')->group(function () {
                 Route::delete('{id}', CartItemDeleteController::class)->name(RouteNameEnum::ApiCartItemDelete);
             });
             Route::put('{id}', CartUpdateController::class)->name(RouteNameEnum::ApiCartItemUpdate);
+            Route::delete('{id}', CartDeleteController::class)->name(RouteNameEnum::ApiCartItemDelete);
         });
     });
 });

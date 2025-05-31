@@ -15,4 +15,5 @@ enum RouteNameEnum: string
     case ApiCartItemDelete = 'api.cart.item.delete';
 
     case ApiCartUpdate = 'api.cart.update';
+    case ApiCartDelete = 'api.cart.delete';
 }

@@ -9,7 +9,11 @@ class CartItemDeleteUseCase implements IDeleteUseCase
 {
     public function execute(int $id): void
     {
-        $item = CartItem::where('id', $id)->firstOrFail();
+        $item = CartItem::find($id);
+        if (empty($item)) {
+            return;
+        }
+
         $cart = $item->cart;
         $item->delete();
 
