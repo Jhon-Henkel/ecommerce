@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y \
 	zlib1g-dev \
 	libzip-dev \
 	vim \
+    sqlite3 \
     wget
 
 # Config Fuse
@@ -33,8 +34,8 @@ RUN addgroup --gid 1000 appuser; \
     adduser --uid 1000 --gid 1000 --disabled-password appuser; \
     adduser www-data appuser; \
     sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf; \
-    sed -i 's|/var/www/html|/var/www/html/public|' /etc/apache2/sites-available/000-default.conf; \
-    chown -R www-data:www-data /var/www/html/public; \
+    sed -i 's|/var/www/html|/var/www/html/backend/public|' /etc/apache2/sites-available/000-default.conf; \
+    chown -R www-data:www-data /var/www/html/backend/public; \
     service apache2 restart;
 
 # Installing and setting xdbug
