@@ -24,9 +24,6 @@ class LoginController extends Controller
     {
         Validator::validateRequest($request, $this->rules);
         $result = $this->useCase->execute($request->input('email'), $request->input('password'));
-        if (empty($result)) {
-            return ResponseApi::renderInternalServerError('Erro ao fazer Login');
-        }
         if ($result == 'invalid_credentials') {
             return ResponseApi::renderUnauthorized();
         }

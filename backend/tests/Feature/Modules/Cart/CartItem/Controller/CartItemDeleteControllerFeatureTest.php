@@ -153,4 +153,11 @@ class CartItemDeleteControllerFeatureTest extends FeatureTestCase
             'product_id' => $productTwo->id,
         ]);
     }
+
+    #[TestDox("Testando com delete de item que não existe")]
+    public function testRouteTestThree()
+    {
+        $response = $this->deleteJson('/api/v1/cart/item/999999', [], $this->makeHeaders());
+        $response->assertStatus(StatusCodeEnum::HttpNoContent->value);
+    }
 }

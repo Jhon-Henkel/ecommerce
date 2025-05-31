@@ -4,6 +4,7 @@ namespace Feature\Modules\Cart;
 
 use App\Infra\Response\Enum\StatusCodeEnum;
 use App\Models\Product\Product;
+use PHPUnit\Framework\Attributes\TestDox;
 use Tests\FeatureTestCase;
 
 class CartDeleteControllerFeatureTest extends FeatureTestCase
@@ -32,7 +33,8 @@ class CartDeleteControllerFeatureTest extends FeatureTestCase
         parent::tearDown();
     }
 
-    public function testRoute()
+    #[TestDox("Testando com delete de carrinho que existe")]
+    public function testRouteTestOne()
     {
         $this->assertDatabaseMissing('cart', [
             'user_id' =>  $this->user->id,
@@ -77,5 +79,12 @@ class CartDeleteControllerFeatureTest extends FeatureTestCase
             'cart_id' => $this->user->cart->id,
             'product_id' => $product->id,
         ]);
+    }
+
+    #[TestDox("Testando com delete de carrinho que não existe")]
+    public function testRouteTestTwo()
+    {
+        $response = $this->deleteJson('/api/v1/cart/999999', [], $this->makeHeaders());
+        $response->assertStatus(StatusCodeEnum::HttpNoContent->value);
     }
 }

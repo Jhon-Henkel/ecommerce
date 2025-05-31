@@ -21,9 +21,4 @@ abstract class BaseUpdateController extends Controller
         $result = $this->getUseCase()->execute($requestData, $id);
         return ResponseApi::renderOk($result);
     }
-
-    protected function getId(): object|string|null
-    {
-        return request()->route('id');
-    }
 }

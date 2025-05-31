@@ -3,7 +3,6 @@
 namespace App\Models\Cart;
 
 use App\Models\PaymentMethod\PaymentMethod;
-use App\Models\User\User;
 use App\Modules\Cart\UseCase\Actions\CartUpdateActionUseCase;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -23,7 +22,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $created_at
  * @property string $updated_at
  *
- * @property-read User $user
  * @property-read PaymentMethod $payment_method
  * @property-read Collection<CartItem> $items
  *
@@ -54,14 +52,6 @@ class Cart extends Model
         static::updated(function (Cart $item) {
             new CartUpdateActionUseCase()->execute($item);
         });
-    }
-
-    /**
-     * @return HasOne<User, $this>
-     */
-    public function user(): HasOne
-    {
-        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     /**

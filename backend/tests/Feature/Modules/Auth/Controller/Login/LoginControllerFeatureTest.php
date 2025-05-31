@@ -31,4 +31,16 @@ class LoginControllerFeatureTest extends FeatureTestCase
         $response->assertStatus(StatusCodeEnum::HttpUnauthorized->value);
         $response->assertJsonStructure(['status', 'data']);
     }
+
+    #[TestDox("Testando com senha inválidas")]
+    public function testLoginRouteTestThree()
+    {
+        $response = $this->postJson('/api/auth/login', [
+            'email' => $this->userEmail,
+            'password' => $this->faker->password,
+        ]);
+
+        $response->assertStatus(StatusCodeEnum::HttpUnauthorized->value);
+        $response->assertJsonStructure(['status', 'data']);
+    }
 }
