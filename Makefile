@@ -1,6 +1,10 @@
 be-bash:
-	@echo "Starting bash..."
+	@echo "Starting backend bash..."
 	docker compose start && docker exec -it ec_backend bash
+
+fe-sh:
+	@echo "Starting frontend sh..."
+	docker compose start && docker exec -it ec_frontend sh
 
 be-logs:
 	@echo "Tailing logs..."
@@ -12,6 +16,7 @@ install:
 	docker compose up -d --build && \
     docker exec ec_backend /bin/bash -c "composer install" && \
     cp backend/.env.example backend/.env && \
+    cp frontend/.env.example frontend/.env && \
     docker exec ec_backend /bin/bash -c "php artisan key:generate" && \
     docker exec ec_backend /bin/bash -c "php artisan migrate --seed --force" && \
     chown www-data:www-data -R backend/storage/logs/ && \
@@ -19,4 +24,4 @@ install:
     chown www-data:www-data backend/database/ && \
     chown www-data:www-data backend/database/database.sqlite
 
-PHONY: be-bash be-logs install
+PHONY: be-bash fe-bash be-logs install

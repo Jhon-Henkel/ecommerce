@@ -3,6 +3,7 @@ Para instalar o projeto, basta executar o comando `make install`
 
 ## Comandos Úteis
 - Acessar container backend: `make be-bash`
+- Acessar container frontend: `make be-sh`
 - Logs backend: `make be-logs`
 - Instalar o projeto: `make install`
 
