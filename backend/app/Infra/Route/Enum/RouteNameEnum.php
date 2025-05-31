@@ -11,4 +11,5 @@ enum RouteNameEnum: string
     case ApiPaymentMethodList = 'api.payment.method.list';
 
     case ApiCartItemCreate = 'api.cart.item.create';
+    case ApiCartItemUpdate = 'api.cart.item.update';
 }

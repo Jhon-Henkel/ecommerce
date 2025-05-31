@@ -16,5 +16,6 @@ class RouteNameEnumUnitTest extends UnitTestCase
         $this->assertEquals('api.payment.method.list', RouteNameEnum::ApiPaymentMethodList->value);
 
         $this->assertEquals('api.cart.item.create', RouteNameEnum::ApiCartItemCreate->value);
+        $this->assertEquals('api.cart.item.update', RouteNameEnum::ApiCartItemUpdate->value);
     }
 }
