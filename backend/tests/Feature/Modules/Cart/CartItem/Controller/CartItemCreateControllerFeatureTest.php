@@ -116,4 +116,46 @@ class CartItemCreateControllerFeatureTest extends FeatureTestCase
             'quantity' => 1,
         ]);
     }
+
+    #[TestDox("Testando adicionando duas vezes o mesmo item no carrinho")]
+    public function testRouteTestThree()
+    {
+        $this->assertDatabaseMissing('cart', [
+            'user_id' =>  $this->user->id,
+        ]);
+
+        $product = Product::firstWhere('name', 'IPhone 16 240 GB');
+
+        $response = $this->postJson('/api/v1/cart/item', [
+            'product_id' => $product->id,
+            'quantity' => 1,
+        ], $this->makeHeaders());
+
+        $response->assertStatus(StatusCodeEnum::HttpCreated->value);
+
+        $response = $this->postJson('/api/v1/cart/item', [
+            'product_id' => $product->id,
+            'quantity' => 1,
+        ], $this->makeHeaders());
+
+        $response->assertStatus(StatusCodeEnum::HttpCreated->value);
+
+        $this->user->refresh();
+
+        $this->assertDatabaseHas('cart', [
+            'user_id' => $this->user->id,
+            'installments' => 0,
+            'total_amount' => 11501,
+            'discount_amount' => 0,
+            'subtotal_amount' => 11501,
+            'payment_method_id' => null,
+            'total_items' => 2,
+        ]);
+
+        $this->assertDatabaseHas('cart_item', [
+            'cart_id' => $this->user->cart->id,
+            'product_id' => $product->id,
+            'quantity' => 2,
+        ]);
+    }
 }

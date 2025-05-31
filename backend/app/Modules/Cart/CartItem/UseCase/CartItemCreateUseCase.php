@@ -11,11 +11,19 @@ class CartItemCreateUseCase implements ICreateUseCase
     public function execute(array $data): array
     {
         $cart = $this->getCart();
-        $item = CartItem::create([
-            'cart_id' =>  $cart->id,
-            'product_id' =>  $data['product_id'],
-            'quantity' =>  $data['quantity'],
-        ]);
+        $item = $this->findItem($cart, $data['product_id']);
+
+        if (is_null($item)) {
+            $item = CartItem::create([
+                'cart_id' =>  $cart->id,
+                'product_id' =>  $data['product_id'],
+                'quantity' =>  $data['quantity'],
+            ]);
+        } else {
+            $item->quantity += $data['quantity'];
+            $item->update();
+        }
+
         return $item->toArray();
     }
 
@@ -29,5 +37,13 @@ class CartItemCreateUseCase implements ICreateUseCase
             ]);
         }
         return $cart;
+    }
+
+    protected function findItem(Cart $cart, int $productId): CartItem|null
+    {
+        return CartItem::query()
+            ->where('product_id', $productId)
+            ->where('cart_id', $cart->id)
+            ->first();
     }
 }
