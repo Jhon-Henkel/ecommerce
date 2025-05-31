@@ -12,6 +12,11 @@ class ResponseApiReal
         return $this->responseJson($data, StatusCodeEnum::HttpCreated);
     }
 
+    public function renderOk(array|null $data = null): JsonResponse
+    {
+        return $this->responseJson($data, StatusCodeEnum::HttpOk);
+    }
+
     public function renderOkList(array|null $data = null): JsonResponse
     {
         if (is_array($data)) {
@@ -23,6 +28,11 @@ class ResponseApiReal
     public function renderNotFount(): JsonResponse
     {
         return $this->responseJson('Objeto não encontrado!', StatusCodeEnum::HttpNotFound);
+    }
+
+    public function renderUnauthorized(): JsonResponse
+    {
+        return $this->responseJson(null, StatusCodeEnum::HttpUnauthorized);
     }
 
     public function renderBadRequest(string|array|null $data = null): JsonResponse
