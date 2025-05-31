@@ -1,22 +1,11 @@
-## Geral
-```
-    cp config/develop/docker/docker-compose.yml docker-compose.yml
-    docker compose up -d
-```
-- Usuário de teste: admin
-- Senha de teste: admin
+## Como Instalar
+Para instalar o projeto, basta executar o comando `make install`
 
-## Backend (dentro do container)
-```
-    composer install
-    cp .env.example .env
-    php artisan key:generate
-    php artisan migrate --seed --force
-    chown www-data:www-data -R storage/logs/
-    chown www-data:www-data -R storage/framework
-    chown www-data:www-data database/
-    chown www-data:www-data database/database.sqlite
-```
+## Comandos Úteis
+- Acessar container backend: `make be-bash`
+- Logs backend: `make be-logs`
+- Instalar o projeto: `make install`
+
 ---
 ## Sobre
 ### 🎯 Objetivo
