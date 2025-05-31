@@ -35,6 +35,10 @@ return Application::configure(basePath: dirname(__DIR__))
                 return ResponseApi::renderUnauthorized();
             }
 
+            if ($e->getMessage() === 'Unauthenticated.') {
+                return ResponseApi::renderUnauthorized();
+            }
+
             ErrorReport::report($e);
             return ResponseApi::renderInternalServerError($e->getMessage());
         });

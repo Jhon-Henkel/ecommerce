@@ -158,4 +158,15 @@ class CartItemCreateControllerFeatureTest extends FeatureTestCase
             'quantity' => 2,
         ]);
     }
+
+    #[TestDox("Testando sem autenticação")]
+    public function testRouteTestFour()
+    {
+        $response = $this->postJson('/api/v1/cart/item', [
+            'product_id' => 1,
+            'quantity' => 1,
+        ]);
+
+        $response->assertStatus(StatusCodeEnum::HttpUnauthorized->value);
+    }
 }

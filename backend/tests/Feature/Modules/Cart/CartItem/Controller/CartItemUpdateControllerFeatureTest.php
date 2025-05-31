@@ -33,7 +33,8 @@ class CartItemUpdateControllerFeatureTest extends FeatureTestCase
         parent::tearDown();
     }
 
-    public function testRoute()
+    #[TestDox("Testando com autenticação")]
+    public function testRouteTestOne()
     {
         $this->assertDatabaseMissing('cart', [
             'user_id' =>  $this->user->id,
@@ -71,5 +72,16 @@ class CartItemUpdateControllerFeatureTest extends FeatureTestCase
             'product_id' => $product->id,
             'quantity' => 2,
         ]);
+    }
+
+    #[TestDox("Testando sem autenticação")]
+    public function testRouteTestTwo()
+    {
+        $response = $this->putJson('/api/v1/cart/item/1', [
+            'product_id' => 1,
+            'quantity' => 1,
+        ]);
+
+        $response->assertStatus(StatusCodeEnum::HttpUnauthorized->value);
     }
 }

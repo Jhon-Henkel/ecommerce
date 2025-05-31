@@ -87,4 +87,12 @@ class CartDeleteControllerFeatureTest extends FeatureTestCase
         $response = $this->deleteJson('/api/v1/cart/999999', [], $this->makeHeaders());
         $response->assertStatus(StatusCodeEnum::HttpNoContent->value);
     }
+
+    #[TestDox("Testando sem autenticação")]
+    public function testRouteTestThree()
+    {
+        $response = $this->deleteJson('/api/v1/cart/1');
+
+        $response->assertStatus(StatusCodeEnum::HttpUnauthorized->value);
+    }
 }

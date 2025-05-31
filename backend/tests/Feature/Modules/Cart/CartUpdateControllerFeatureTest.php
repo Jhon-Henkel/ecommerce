@@ -207,4 +207,15 @@ class CartUpdateControllerFeatureTest extends FeatureTestCase
             'Teste com 12 parcela' => [12, 6479.81, 0],
         ];
     }
+
+    #[TestDox("Testando sem autenticação")]
+    public function testRouteTestFour()
+    {
+        $response = $this->putJson('/api/v1/cart/1', [
+            'payment_method_id' => 1,
+            'installments' => 1,
+        ]);
+
+        $response->assertStatus(StatusCodeEnum::HttpUnauthorized->value);
+    }
 }
