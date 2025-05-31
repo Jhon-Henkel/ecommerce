@@ -25,6 +25,11 @@ class ResponseApiReal
         return response()->json($data, StatusCodeEnum::HttpOk->value);
     }
 
+    public function renderNoContent(): JsonResponse
+    {
+        return $this->responseJson(null, StatusCodeEnum::HttpNoContent);
+    }
+
     public function renderNotFount(): JsonResponse
     {
         return $this->responseJson('Objeto não encontrado!', StatusCodeEnum::HttpNotFound);

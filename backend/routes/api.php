@@ -3,6 +3,7 @@
 use App\Infra\Route\Enum\RouteNameEnum;
 use App\Modules\Auth\Controller\Login\LoginController;
 use App\Modules\Cart\CartItem\Controller\CartItemCreateController;
+use App\Modules\Cart\CartItem\Controller\CartItemDeleteController;
 use App\Modules\Cart\CartItem\Controller\CartItemUpdateController;
 use App\Modules\PaymentMethod\Controller\PaymentMethodListController;
 use App\Modules\Product\Controller\ProductListController;
@@ -27,6 +28,7 @@ Route::prefix('v1')->group(function () {
             Route::prefix('item')->group(function () {
                 Route::post('', CartItemCreateController::class)->name(RouteNameEnum::ApiCartItemCreate);
                 Route::put('{id}', CartItemUpdateController::class)->name(RouteNameEnum::ApiCartItemUpdate);
+                Route::delete('{id}', CartItemDeleteController::class)->name(RouteNameEnum::ApiCartItemDelete);
             });
         });
     });
