@@ -13,7 +13,7 @@ class ProductListUseCase implements IListUseCase
 
         if (!empty($search)) {
             $data->where(function ($query) use ($search) {
-                $query->where('name', 'ilike', "%$search%");
+                $query->whereRaw("name LIKE ? COLLATE NOCASE", ["%$search%"]);
             });
         }
 
