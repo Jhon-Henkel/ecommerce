@@ -9,4 +9,6 @@ enum RouteNameEnum: string
     case ApiProductList = 'api.product.list';
 
     case ApiPaymentMethodList = 'api.payment.method.list';
+
+    case ApiCartItemCreate = 'api.cart.item.create';
 }
