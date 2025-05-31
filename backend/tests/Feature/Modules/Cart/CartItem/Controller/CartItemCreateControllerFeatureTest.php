@@ -4,6 +4,7 @@ namespace Feature\Modules\Cart\CartItem\Controller;
 
 use App\Infra\Response\Enum\StatusCodeEnum;
 use App\Models\Product\Product;
+use PHPUnit\Framework\Attributes\TestDox;
 use Tests\FeatureTestCase;
 
 class CartItemCreateControllerFeatureTest extends FeatureTestCase
@@ -32,7 +33,8 @@ class CartItemCreateControllerFeatureTest extends FeatureTestCase
         parent::tearDown();
     }
 
-    public function testRoute()
+    #[TestDox("Testando com um item no carrinho")]
+    public function testRouteTestOne()
     {
         $this->assertDatabaseMissing('cart', [
             'user_id' =>  $this->user->id,
@@ -52,16 +54,65 @@ class CartItemCreateControllerFeatureTest extends FeatureTestCase
         $this->assertDatabaseHas('cart', [
             'user_id' => $this->user->id,
             'installments' => 0,
-            'total_amount' => 0,
+            'total_amount' => 5750.5,
             'discount_amount' => 0,
-            'subtotal_amount' => 0,
+            'subtotal_amount' => 5750.5,
             'payment_method_id' => null,
-            'total_items' => 0,
+            'total_items' => 1,
         ]);
 
         $this->assertDatabaseHas('cart_item', [
             'cart_id' => $this->user->cart->id,
             'product_id' => $product->id,
+            'quantity' => 1,
+        ]);
+    }
+
+    #[TestDox("Testando adicionando mais item diferente carrinho")]
+    public function testRouteTestTwo()
+    {
+        $this->assertDatabaseMissing('cart', [
+            'user_id' =>  $this->user->id,
+        ]);
+
+        $productOne = Product::firstWhere('name', 'IPhone 16 240 GB');
+        $productTwo = Product::firstWhere('name', 'Playstation 5');
+
+        $response = $this->postJson('/api/v1/cart/item', [
+            'product_id' => $productOne->id,
+            'quantity' => 1,
+        ], $this->makeHeaders());
+
+        $response->assertStatus(StatusCodeEnum::HttpCreated->value);
+
+        $response = $this->postJson('/api/v1/cart/item', [
+            'product_id' => $productTwo->id,
+            'quantity' => 1,
+        ], $this->makeHeaders());
+
+        $response->assertStatus(StatusCodeEnum::HttpCreated->value);
+
+        $this->user->refresh();
+
+        $this->assertDatabaseHas('cart', [
+            'user_id' => $this->user->id,
+            'installments' => 0,
+            'total_amount' => 10050.5,
+            'discount_amount' => 0,
+            'subtotal_amount' => 10050.5,
+            'payment_method_id' => null,
+            'total_items' => 2,
+        ]);
+
+        $this->assertDatabaseHas('cart_item', [
+            'cart_id' => $this->user->cart->id,
+            'product_id' => $productOne->id,
+            'quantity' => 1,
+        ]);
+
+        $this->assertDatabaseHas('cart_item', [
+            'cart_id' => $this->user->cart->id,
+            'product_id' => $productTwo->id,
             'quantity' => 1,
         ]);
     }

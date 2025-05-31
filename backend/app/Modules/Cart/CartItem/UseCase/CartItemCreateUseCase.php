@@ -21,7 +21,7 @@ class CartItemCreateUseCase implements ICreateUseCase
 
     protected function getCart(): Cart
     {
-        $cart = auth()->user()->cart;
+        $cart = Cart::firstWhere('user_id', auth()->user()->id);
         if (empty($cart)) {
             $cart = Cart::create([
                 'user_id' =>  auth()->user()->id,

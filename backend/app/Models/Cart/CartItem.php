@@ -3,6 +3,7 @@
 namespace App\Models\Cart;
 
 use App\Models\Product\Product;
+use App\Modules\Cart\UseCase\Actions\CartUpdateActionUseCase;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -34,6 +35,20 @@ class CartItem extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    protected static function boot(): void
+    {
+        parent::boot();
+        static::created(function (CartItem $item) {
+            new CartUpdateActionUseCase()->execute($item->cart);
+        });
+        static::deleted(function (CartItem $item) {
+            new CartUpdateActionUseCase()->execute($item->cart);
+        });
+        static::updated(function (CartItem $item) {
+            new CartUpdateActionUseCase()->execute($item->cart);
+        });
+    }
 
     /**
      * @return HasOne<Cart, $this>

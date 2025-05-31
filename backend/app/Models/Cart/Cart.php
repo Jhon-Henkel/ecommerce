@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int|null $payment_method_id
  * @property int $total_items
  * @property int $installments
- * @property float $sub_total_amount
+ * @property float $subtotal_amount
  * @property float $discount_amount
  * @property float $total_amount
  * @property string $created_at
@@ -37,7 +37,7 @@ class Cart extends Model
         'payment_method_id',
         'total_items',
         'installments',
-        'sub_total_amount',
+        'subtotal_amount',
         'discount_amount',
         'total_amount',
     ];
