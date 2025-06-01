@@ -59,7 +59,7 @@ class CartGetControllerFeatureTest extends FeatureTestCase
 
         $response->assertStatus(StatusCodeEnum::HttpOk->value);
 
-        $response = $this->getJson('/api/v1/cart/' . $this->user->cart->id, $this->makeHeaders());
+        $response = $this->getJson('/api/v1/cart/' . $this->user->id, $this->makeHeaders());
 
         $response->assertStatus(StatusCodeEnum::HttpOk->value);
 

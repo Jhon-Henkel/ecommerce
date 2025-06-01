@@ -3,7 +3,7 @@
     import { ptBR } from "date-fns/locale";
 
     const toastConfig = {
-        position: "top-right",
+        position: "top-center",
         duration: TimeEnum.fiveSecondsInMs,
         swipeThreshold: 100
     }

@@ -34,8 +34,8 @@ export const alertApi = {
     },
     askDelete: async (callback: () => Promise<boolean>): Promise<void> => {
         return await alertApi.ask(
-            'Deseja realmente deletar esse item?',
-            'Uma vez deletado, não é possível recuperar esse item.',
+            'Deseja realmente remover esse item?',
+            '',
             '#dc2a2a',
             '#dc2a2a',
             callback

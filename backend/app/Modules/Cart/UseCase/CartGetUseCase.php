@@ -9,6 +9,9 @@ class CartGetUseCase implements IGetUseCase
 {
     public function execute(int $id): array
     {
-        return Cart::with('payment_method', 'items.product')->findOrFail($id)->toArray();
+        return Cart::with('payment_method', 'items.product')
+            ->where('user_id', $id)
+            ->firstOrFail()
+            ->toArray();
     }
 }

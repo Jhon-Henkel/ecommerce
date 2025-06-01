@@ -14,7 +14,6 @@ import {CartItemService} from "~/modules/cart/item/cart.item.service";
 
 const store = useAuthStore()
 const items = ref<IProductList[]>()
-const loading = ref(true)
 const productService = new ProductService()
 const cartItemService = new CartItemService()
 
@@ -23,14 +22,12 @@ async function addToCart(item: IProductList) {
 }
 
 onMounted(async () => {
-    loading.value = true
     items.value = await productService.list();
-    loading.value = false
 })
 </script>
 
 <template>
-    <app-page :breadcrumb="new BreadcrumbDTO()" page-title="Início">
+    <app-page :breadcrumb="new BreadcrumbDTO()" :page-title="PagesMap.page.index.label">
         <div class="flex justify-between">
             <app-page-title title="Confira Nossos Produtos"/>
             <app-page-title title="Tudo com 10% de desconto à vista"/>

@@ -21,11 +21,9 @@ export const PagesMap = {
             },
         },
         cart: {
-            login: {
-                label: 'Login',
-                icon: '',
-                route: '/login',
-            },
+            label: 'Carrinho',
+            icon: IconEnum.shoppingCart,
+            route: '/carrinho',
         },
     }
 }

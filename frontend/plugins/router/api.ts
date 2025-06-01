@@ -8,6 +8,7 @@ import type {IApiListResponseInterface} from "~/plugins/router/api.list.response
 import type {IProductList} from "~/modules/products/product.list.item.interface";
 import type {ICartItemList} from "~/modules/cart/item/cart.item.list.interface";
 import type {IApiResponseInterface} from "~/plugins/router/api.get.response.interface";
+import type {ICartList} from "~/modules/cart/cart.list.interface";
 
 export function createApi(notify: NotificationInterface) {
     const config = useRuntimeConfig()
@@ -36,7 +37,6 @@ export function createApi(notify: NotificationInterface) {
                 notify.error('Nome de usuário e/ou senha está incorreto', 'Credenciais inválidas!')
             } else if (status === HttpStatusCode.NotFound) {
                 notificated = true
-                notify.error('Não conseguimos encontrar o item solicitado!', 'Não encontrado!')
             }
         }
         if (error.message.includes("timeout of ")) {
@@ -156,7 +156,19 @@ export function createApi(notify: NotificationInterface) {
                 create: async function (data: {product_id: number, quantity: number}): Promise<IApiResponseInterface<ICartItemList>> {
                     return await baseCreate('cart/item', data)
                 },
-            }
+                update: async function (data: {quantity: number}, id: number): Promise<IApiResponseInterface<ICartItemList>> {
+                    return await baseUpdate('cart/item', id, data)
+                },
+                delete: async function (id: number): Promise<boolean> {
+                    return await baseDelete('cart/item', id)
+                },
+            },
+            get: async function (id: number): Promise<IApiResponseInterface<ICartList>> {
+                return await baseGet('cart', id)
+            },
+            delete: async function (id: number): Promise<boolean> {
+                return await baseDelete('cart', id)
+            },
         }
     }
 }

@@ -29,7 +29,8 @@ class LoginController extends Controller
         }
         return ResponseApi::renderOk([
             'token' => $result,
-            'cart_items' => auth()->user()?->cart?->total_items ?? 0
+            'cart_items' => auth()->user()?->cart?->total_items ?? 0,
+            'user_id' => auth()->user()?->id ?? null,
         ]);
     }
 }
