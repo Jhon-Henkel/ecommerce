@@ -20,5 +20,12 @@ export const PagesMap = {
                 route: '/login',
             },
         },
+        cart: {
+            login: {
+                label: 'Login',
+                icon: '',
+                route: '/login',
+            },
+        },
     }
 }

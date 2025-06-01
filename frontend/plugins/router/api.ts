@@ -6,6 +6,8 @@ import {useAuthStore} from "~/modules/auth/auth.store";
 import {RouteUtil} from "~/utils/route/route.util";
 import type {IApiListResponseInterface} from "~/plugins/router/api.list.response.interface";
 import type {IProductList} from "~/modules/products/product.list.item.interface";
+import type {ICartItemList} from "~/modules/cart/item/cart.item.list.interface";
+import type {IApiResponseInterface} from "~/plugins/router/api.get.response.interface";
 
 export function createApi(notify: NotificationInterface) {
     const config = useRuntimeConfig()
@@ -148,6 +150,13 @@ export function createApi(notify: NotificationInterface) {
             list: async function (page: number = 1, perPage: number = 10, search: string = '', orderBy: string = 'id', order: string = 'desc'): Promise<IApiListResponseInterface<IProductList>> {
                 return await baseList('product', page, perPage, search, orderBy, order)
             },
+        },
+        cart: {
+            item: {
+                create: async function (data: {product_id: number, quantity: number}): Promise<IApiResponseInterface<ICartItemList>> {
+                    return await baseCreate('cart/item', data)
+                },
+            }
         }
     }
 }

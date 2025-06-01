@@ -6,6 +6,7 @@ import AppNavbarSettingsButton from "~/components/navbar/app-navbar-settings-but
 import {RouteUtil} from "~/utils/route/route.util.js";
 import AppButton from "~/components/button/app-button.vue";
 import {IconEnum} from "~/utils/enum/icon.enum.js";
+import {useCartStore} from "~/modules/cart/item/cart.item.store.js";
 
 const {currentTheme} = useTheme()
 const store = useAuthStore()
@@ -22,7 +23,11 @@ const device = useDevice()
                 @click="RouteUtil.redirect(PagesMap.page.index)"
             />
             <div class="flex items-center space-x-3 md:mr-5">
-                <span v-if="store.token" class="text-white hidden sm:inline">Olá Usuário</span>
+                <UChip  v-if="store.token" :text="useCartStore().quantity" size="3xl" color="neutral">
+                    <app-button :icon="IconEnum.shoppingCart" @click="RouteUtil.redirect(PagesMap.page.cart)">
+                        Carrinho
+                    </app-button>
+                </UChip>
                 <app-button v-else :icon="IconEnum.user" @click="RouteUtil.redirect(PagesMap.page.auth.login)">
                     Fazer Login
                 </app-button>

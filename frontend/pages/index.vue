@@ -10,14 +10,16 @@ import {ProductService} from "~/modules/products/product.service";
 import type {IProductList} from "~/modules/products/product.list.item.interface";
 import {RouteUtil} from "~/utils/route/route.util";
 import {NumberUtil} from "~/utils/number/number.util";
+import {CartItemService} from "~/modules/cart/item/cart.item.service";
 
 const store = useAuthStore()
 const items = ref<IProductList[]>()
 const loading = ref(true)
 const productService = new ProductService()
+const cartItemService = new CartItemService()
 
 async function addToCart(item: IProductList) {
-
+    await cartItemService.addToCart(item, 1)
 }
 
 onMounted(async () => {
