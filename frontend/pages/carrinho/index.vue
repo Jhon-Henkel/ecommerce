@@ -65,7 +65,8 @@ async function deleteItem(item: ICartItemList): Promise<void> {
 async function deleteCart(): Promise<void> {
     if (cart.value) {
         await cartService.delete(cart.value.id)
-        await loadCart();
+        cartStore.quantity = 0
+        RouteUtil.redirect(PagesMap.page.index)
     }
 }
 

@@ -2,7 +2,6 @@
 import {useTheme} from "~/composables/theme/use.theme.js";
 import {useAuthStore} from "~/modules/auth/auth.store.js";
 import AppNavbarColorModeButton from "~/components/navbar/app-navbar-color-mode-button.vue";
-import AppNavbarSettingsButton from "~/components/navbar/app-navbar-settings-button.vue";
 import {RouteUtil} from "~/utils/route/route.util.js";
 import AppButton from "~/components/button/app-button.vue";
 import {IconEnum} from "~/utils/enum/icon.enum.js";
@@ -32,7 +31,6 @@ const device = useDevice()
                     Fazer Login
                 </app-button>
                 <app-navbar-color-mode-button/>
-                <app-navbar-settings-button/>
                 <app-button :icon="IconEnum.logOut" class="hover:bg-error text-white" variant="ghost" color="neutral" @click="store.logout()">
                     Logout
                 </app-button>

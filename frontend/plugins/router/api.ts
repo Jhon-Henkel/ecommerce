@@ -104,7 +104,7 @@ export function createApi(notify: NotificationInterface) {
 
     async function baseCreate(uri: string, data: any): Promise<any> {
         const url: string = mountApiV1Url(uri)
-        let headers = makeJsonHeaders()
+        const headers = makeJsonHeaders()
         const result: AxiosResponse = await axios.post(url, data, headers)
         return result.data
     }
