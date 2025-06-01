@@ -4,6 +4,8 @@ import type {LoginFormInterface} from "~/modules/auth/login/login.form.interface
 import type {NotificationInterface} from "~/composables/notification/notify.interface";
 import {useAuthStore} from "~/modules/auth/auth.store";
 import {RouteUtil} from "~/utils/route/route.util";
+import type {IApiListResponseInterface} from "~/plugins/router/api.list.response.interface";
+import type {IProductList} from "~/modules/products/product.list.item.interface";
 
 export function createApi(notify: NotificationInterface) {
     const config = useRuntimeConfig()
@@ -140,6 +142,11 @@ export function createApi(notify: NotificationInterface) {
                 }
                 const response: AxiosResponse = await axios.post(url, data, headers)
                 return response.data
+            },
+        },
+        products: {
+            list: async function (page: number = 1, perPage: number = 10, search: string = '', orderBy: string = 'id', order: string = 'desc'): Promise<IApiListResponseInterface<IProductList>> {
+                return await baseList('product', page, perPage, search, orderBy, order)
             },
         }
     }

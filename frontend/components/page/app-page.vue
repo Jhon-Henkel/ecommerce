@@ -25,7 +25,7 @@ useHead({ title: props.pageTitle })
             <app-breadcrumb :breadcrumb="breadcrumb"/>
             <div class="flex">
                 <main :class="[(device.isMobile ? 'mx-1' : 'mx-5'), 'flex-1 transition-all px-4 overflow-hidden']">
-                    <div class="w-full overflow-x-auto">
+                    <div class="w-full overflow-x-auto mt-4">
                         <slot/>
                     </div>
                 </main>

@@ -23,12 +23,12 @@ const device = useDevice()
             />
             <div class="flex items-center space-x-3 md:mr-5">
                 <span v-if="store.token" class="text-white hidden sm:inline">Olá Usuário</span>
-                <app-button v-else @click="RouteUtil.redirect(PagesMap.page.auth.login)">
+                <app-button v-else :icon="IconEnum.user" @click="RouteUtil.redirect(PagesMap.page.auth.login)">
                     Fazer Login
                 </app-button>
                 <app-navbar-color-mode-button/>
                 <app-navbar-settings-button/>
-                <app-button :icon="IconEnum.logOut" class="hover:bg-error" variant="ghost" color="neutral" @click="RouteUtil.redirect(PagesMap.page.auth.login)">
+                <app-button :icon="IconEnum.logOut" class="hover:bg-error text-white" variant="ghost" color="neutral" @click="store.logout()">
                     Logout
                 </app-button>
             </div>

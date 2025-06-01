@@ -102,4 +102,5 @@ export const IconEnum = {
     download: 'lucide:download',
     sun: 'lucide:sun',
     moon: 'lucide:moon',
+    shoppingCart: 'lucide:shopping-cart',
 }

@@ -36,7 +36,7 @@ function getGridClass(colCount: number): string {
 </script>
 
 <template>
-    <div class="grid" :class="[gridClass, 'gap-4']">
+    <div class="grid" :class="[gridClass, 'gap-4 m-1']">
         <slot/>
     </div>
 </template>
