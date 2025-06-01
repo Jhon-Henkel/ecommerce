@@ -31,7 +31,7 @@ const device = useDevice()
                     Fazer Login
                 </app-button>
                 <app-navbar-color-mode-button/>
-                <app-button :icon="IconEnum.logOut" class="hover:bg-error text-white" variant="ghost" color="neutral" @click="store.logout()">
+                <app-button v-if="store.token" :icon="IconEnum.logOut" class="hover:bg-error text-white" variant="ghost" color="neutral" @click="store.logout()">
                     Logout
                 </app-button>
             </div>
