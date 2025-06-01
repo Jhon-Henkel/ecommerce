@@ -9,6 +9,7 @@ import type {IProductList} from "~/modules/products/product.list.item.interface"
 import type {ICartItemList} from "~/modules/cart/item/cart.item.list.interface";
 import type {IApiResponseInterface} from "~/plugins/router/api.get.response.interface";
 import type {ICartList} from "~/modules/cart/cart.list.interface";
+import type {IPaymentMethodList} from "~/modules/payment-method/payment.method.list.item.interface";
 
 export function createApi(notify: NotificationInterface) {
     const config = useRuntimeConfig()
@@ -151,6 +152,11 @@ export function createApi(notify: NotificationInterface) {
                 return await baseList('product', page, perPage, search, orderBy, order)
             },
         },
+        paymentMethod: {
+            list: async function (page: number = 1, perPage: number = 10, search: string = '', orderBy: string = 'id', order: string = 'desc'): Promise<IApiListResponseInterface<IPaymentMethodList>> {
+                return await baseList('payment-method', page, perPage, search, orderBy, order)
+            },
+        },
         cart: {
             item: {
                 create: async function (data: {product_id: number, quantity: number}): Promise<IApiResponseInterface<ICartItemList>> {
@@ -168,6 +174,9 @@ export function createApi(notify: NotificationInterface) {
             },
             delete: async function (id: number): Promise<boolean> {
                 return await baseDelete('cart', id)
+            },
+            update: async function (data: {payment_method_id: number, installments: number}, id: number): Promise<IApiResponseInterface<ICartList>> {
+                return await baseUpdate('cart', id, data)
             },
         }
     }

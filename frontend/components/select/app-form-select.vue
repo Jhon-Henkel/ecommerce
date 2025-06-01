@@ -21,23 +21,28 @@ const props = defineProps({
         default: '',
     },
     modelValue: {
-        type: [Number, String],
+        type: [Number, String, null],
         required: true,
     },
     items: {
-        type: Array<{id: string|number, label: string}>,
+        type: Array,
         required: true,
     },
     disabled: {
         type: Boolean,
         default: false,
-    }
+    },
+    labelKey: {
+        type: String,
+        required: false,
+        default: 'label',
+    },
 })
 
 const { currentTheme } = useTheme()
 
 const emit = defineEmits<{
-    (e: 'update:modelValue', value: number|string): void
+    (e: 'update:modelValue', value: number|string|null): void
 }>()
 
 const model = computed({
@@ -51,7 +56,7 @@ const model = computed({
         <USelectMenu
             v-model="model"
             value-key="id"
-            label-key="label"
+            :label-key="labelKey"
             :items="items"
             class="w-full max-w-full truncate"
             :color="currentTheme.primaryColorRoot"

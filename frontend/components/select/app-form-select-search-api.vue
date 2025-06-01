@@ -47,16 +47,6 @@ const props = defineProps({
         type: String,
         default: 'desc',
     },
-    pageMapNewItem: {
-        type: Object as PropType<PageMap>,
-        required: false,
-        default: undefined
-    },
-    pageMapEditItem: {
-        type: Object as PropType<PageMap>,
-        required: false,
-        default: undefined
-    }
 })
 
 const loading = ref(false)
@@ -125,9 +115,6 @@ onMounted(async () => {
                     </div>
                 </template>
             </USelectMenu>
-            <app-button v-if="pageMapNewItem !== undefined" :icon="IconEnum.plus" variant="soft" @click="RouteUtil.redirect(pageMapNewItem, true)"/>
-            <app-button v-if="pageMapEditItem !== undefined" :icon="IconEnum.pencil" variant="soft" @click="RouteUtil.redirect(pageMapEditItem, true)"/>
-            <app-button v-if="pageMapNewItem !== undefined || pageMapEditItem !== undefined" :icon="IconEnum.rotateCcw" variant="soft" @click="list"/>
         </div>
     </UFormField>
 </template>
