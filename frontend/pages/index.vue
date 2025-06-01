@@ -9,11 +9,16 @@ import {IconEnum} from "~/utils/enum/icon.enum";
 import {ProductService} from "~/modules/products/product.service";
 import type {IProductList} from "~/modules/products/product.list.item.interface";
 import {RouteUtil} from "~/utils/route/route.util";
+import {NumberUtil} from "~/utils/number/number.util";
 
 const store = useAuthStore()
 const items = ref<IProductList[]>()
 const loading = ref(true)
 const productService = new ProductService()
+
+async function addToCart(item: IProductList) {
+
+}
 
 onMounted(async () => {
     loading.value = true
@@ -24,23 +29,23 @@ onMounted(async () => {
 
 <template>
     <app-page :breadcrumb="new BreadcrumbDTO()" page-title="Início">
-        <app-page-title title="Confira Nossos Produtos"/>
-        <app-grid :cols="5">
+        <div class="flex justify-between">
+            <app-page-title title="Confira Nossos Produtos"/>
+            <app-page-title title="Tudo com 10% de desconto à vista"/>
+        </div>
+        <app-grid :cols="3">
             <UCard v-for="item in items" :key="item.id">
-                <template #header>
-                    <span class="text-lg">
-                        {{ item.name }}
-                    </span>
-                </template>
-
-                <NuxtImg v-if="item.name === 'IPhone 16 240 GB'" src="/assets/images/iphone.webp" alt="IPhone 16" class="w-full rounded-lg" width="320" height="320"/>
-                <NuxtImg v-if="item.name === 'Ar Condicionado Split 12000 Btu\'s'" src="/assets/images/ar.webp" alt="Ar Condicionado" class="w-full rounded-lg" width="320" height="320"/>
-                <NuxtImg v-if="item.name === 'Parafusadeira 21v'" src="/assets/images/parafusadeira.webp" alt="Parafusadeira" class="w-full rounded-lg" width="320" height="320"/>
-                <NuxtImg v-if="item.name === 'Playstation 5'" src="/assets/images/ps5.webp" alt="Playstation 5" class="w-full rounded-lg" width="320" height="320"/>
-                <NuxtImg v-if="item.name === 'Guitarra Elétrica Gibson'" src="/assets/images/gibson.webp" alt="Guitarra Elétrica Gibson" class="w-full rounded-lg" width="320" height="320"/>
-
+                <NuxtImg :src="productService.getImageByProduct(item)" alt="Imagem Produto" class="w-full rounded-lg" width="320" height="320"/>
                 <template #footer>
-                    <app-button v-if="store.token" :icon="IconEnum.shoppingCart" class="w-full justify-center">
+                    <div class="flex justify-between text-lg mb-2">
+                        <span>
+                            {{ item.name }}
+                        </span>
+                        <span>
+                            R$ {{ NumberUtil.toCurrency(item.price) }}
+                        </span>
+                    </div>
+                    <app-button v-if="store.token" :icon="IconEnum.shoppingCart" class="w-full justify-center" @click="addToCart(item)">
                         Adicionar ao Carrinho
                     </app-button>
                     <app-button v-else :icon="IconEnum.user" class="w-full justify-center" @click="RouteUtil.redirect(PagesMap.page.auth.login)">
