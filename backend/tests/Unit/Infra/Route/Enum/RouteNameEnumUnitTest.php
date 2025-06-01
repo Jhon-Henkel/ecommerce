@@ -21,5 +21,6 @@ class RouteNameEnumUnitTest extends UnitTestCase
 
         $this->assertEquals('api.cart.update', RouteNameEnum::ApiCartUpdate->value);
         $this->assertEquals('api.cart.delete', RouteNameEnum::ApiCartDelete->value);
+        $this->assertEquals('api.cart.get', RouteNameEnum::ApiCartGet->value);
     }
 }
