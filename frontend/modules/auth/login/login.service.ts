@@ -2,6 +2,7 @@ import type {LoginFormInterface} from "~/modules/auth/login/login.form.interface
 import {useAuthStore} from "~/modules/auth/auth.store";
 import {useTheme} from "~/composables/theme/use.theme";
 import {RouteUtil} from "~/utils/route/route.util";
+import {useCartStore} from "~/modules/cart/item/cart.item.store";
 
 export default class  LoginService {
     private store = useAuthStore()
@@ -10,6 +11,7 @@ export default class  LoginService {
         const { $api } = useNuxtApp()
         const result = await $api.authentication.login(data)
         this.store.login(result.data)
+        useCartStore().addItem(result.data.cart_items)
         this.setUserTheme()
         await nextTick()
 

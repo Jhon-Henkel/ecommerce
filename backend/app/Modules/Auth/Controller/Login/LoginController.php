@@ -27,6 +27,9 @@ class LoginController extends Controller
         if ($result == 'invalid_credentials') {
             return ResponseApi::renderUnauthorized();
         }
-        return ResponseApi::renderOk(['token' => $result]);
+        return ResponseApi::renderOk([
+            'token' => $result,
+            'cart_items' => auth()->user()?->cart?->total_items ?? 0
+        ]);
     }
 }
