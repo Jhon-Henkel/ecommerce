@@ -1,6 +1,8 @@
 # 🛒🛒 Desafio Ecommerce 🛒🛒
 <img src="https://go-skill-icons.vercel.app/api/icons?i=git,docker,php,sqlite,laravel,html,css,vue,vite,typescript,pinia,composer,npm,nuxt,tailwind" />
 
+---
+
 Nesse projeto, segui a abordagem de criar um carrinho para cada usuário, sendo assim, sempre que um carrinho sofre alteração, o backend recalcula os valores do mesmo e mantém sempre tudo atualizado.
 
 Com relação à arquitetura escolhida para o backend, utilizei um padrão no qual já escreví anteriormente no dev.to, você pode dar uma conferida [aqui](https://dev.to/jhonhenkel/minha-arquitetura-no-laravel-26nj).
