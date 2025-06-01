@@ -1,25 +1,40 @@
-# Desafio Ecommerce
+# 🛒🛒 Desafio Ecommerce 🛒🛒
 <img src="https://go-skill-icons.vercel.app/api/icons?i=git,docker,php,sqlite,laravel,html,css,vue,vite,typescript,pinia,composer,npm,nuxt,tailwind" />
 
 Nesse projeto, segui a abordagem de criar um carrinho para cada usuário, sendo assim, sempre que um carrinho sofre alteração, o backend recalcula os valores do mesmo e mantém sempre tudo atualizado.
 
 Com relação à arquitetura escolhida para o backend, utilizei um padrão no qual já escreví anteriormente no dev.to, você pode dar uma conferida [aqui](https://dev.to/jhonhenkel/minha-arquitetura-no-laravel-26nj).
 
-### Sumário
-- [Como Instalar](#como-instalar)
-  - [Processo automatizado](#processo-automatizado)
-  - [Processo manual](#processo-manual)
-- [Comandos Make](#comandos-make)
-- [Desafio solicitado](#desafio-solicitado)
+Neste projeto, optei por ir além do escopo mínimo proposto e simular um fluxo mais realista de e-commerce. Implementei:
+- Sistema de autenticação com usuários e login.
+- Persistência de produtos e carrinho com SQLite.
+- Backend centralizado para todas as regras de negócio.
+- Recalculo automático do carrinho a cada alteração.
+- 
+Isso garante um comportamento mais próximo de um sistema real, com lógica desacoplada do frontend e fácil de manter/escalar.
+### 📝 Sumário
+- [📌 Decisões Técnicas](#decisões-técnicas)
+- [⚙️ Como Instalar](#como-instalar)
+  - [🤖 Processo automatizado](#processo-automatizado)
+  - [🔧 Processo manual](#processo-manual)
+- [📟 Comandos Make](#comandos-make)
+- [📦 Desafio solicitado](#desafio-solicitado)
   - [🎯 Objetivo](#-objetivo)
   - [🧩 Descrição do Desafio](#-descrição-do-desafio)
   - [📦 Especificações Técnicas](#-especificações-técnicas)
+
+## Decisões Técnicas
+- Os produtos estão armazenados em banco (SQLite) por questão de organização e facilidade de manutenção.
+- Cada usuário tem seu próprio carrinho, persistido em banco.
+- Toda regra de cálculo (descontos, juros) está centralizada no backend, mantendo o frontend desacoplado e simples.
+- A cada alteração no carrinho, o valor total é automaticamente recalculado no backend.
+- Implementado sistema de login para simular múltiplos usuários.
 
 ## Como Instalar
 ### Processo automatizado: 
 - Para instalar o projeto, basta executar o comando `make install`. 
 - Após finalizar a instalação, pode demorar alguns minutos até que seja instalado os pacotes npm e seja dado o start no nuxt. 
-- Após finalizar a instalação, caso dê erros ao fazer login, rode os comandos abaixo:,
+- Após finalizar a instalação, caso ocorra erro ao fazer login, rode os comandos abaixo:,
   ```bash
   sudo chown www-data:www-data -R backend/storage/logs/ && sudo chown www-data:www-data -R backend/storage/framework && sudo chown www-data:www-data backend/database/ && sudo chown www-data:www-data backend/database/database.sqlite
   ```
@@ -50,10 +65,10 @@ Para acessar o frontend, basta acessar a URL `http://localhost` e para acessar o
 
 ---
 ## Desafio solicitado
-### 🎯 Objetivo
+### Objetivo
 Desenvolver um módulo de carrinho de compras, simulando a jornada de compra de um usuário. O sistema deverá permitir a seleção de produtos, escolha da forma de pagamento e exibir o valor final da compra, aplicando descontos ou juros, conforme regras de negócio.
 
-### 🧩 Descrição do Desafio
+### Descrição do Desafio
 Você deve construir:
 
 - Uma API em PHP responsável por processar os dados do carrinho, aplicar regras de cálculo e retornar o valor final da compra.
@@ -63,7 +78,7 @@ Você deve construir:
   - Visualizar o valor final da compra, já com os descontos ou acréscimos aplicados
 - Teste unitário (backend): Criar testes automatizados que verifiquem se o valor final da compra está sendo corretamente calculado de acordo com as regras de desconto para pagamentos à vista e aplicação de juros compostos para parcelamentos.
 
-### 📦 Especificações Técnicas
+### Especificações Técnicas
 - **Frontend**: Vue.js (com ou sem biblioteca de componentes)
 - **Backend**: PHP (com ou sem framework)
 - **Banco de dados**: Não é necessário — os produtos podem estar fixos no código
@@ -98,7 +113,7 @@ Exemplo de payload da requisição:
     "parcelas": 3
 }
 ```
-💡 Exemplo de resposta da API:
+Exemplo de resposta da API:
 
 ```json
 {
